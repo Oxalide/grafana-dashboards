@@ -89,7 +89,7 @@ def main():
     try:
         grafana = Grafana()
         logger.info("Try to Create prometheus datasource")
-        grafana.create_datastore("prometheus-k8s-2", "prometheus", "http://prometheus-operated:9090")
+        grafana.create_datastore("prometheus-k8s", "prometheus", "http://prometheus-operated:9090")
         logger.info("Try to import grafana dashboards")
         grafana.import_dashboards(cli.conf, base_url)
     except GrafanaException as error:

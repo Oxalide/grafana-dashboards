@@ -1,0 +1,25 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: grafana-import-dashboard
+  namespace: monitoring
+spec:
+  template:
+    metadata:
+      name: grafana-import-dashboard
+    spec:
+      containers:
+      - name: grafana-import-dashboard
+        image: oxalide/grafana-dashboards:latest
+        imagePullPolicy: Always
+        env:
+        - name: GRAFANA_USERNAME
+            secretKeyRef:
+              name: grafana-secrets
+              key: username
+        - name: GRAFANA_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: grafana-secrets
+              key: admin-password
+      restartPolicy: Never

@@ -40,7 +40,6 @@ class Grafana(object):
     def import_dashboards(self, path, base_url):
         self.pattern = "*.json"
         self.dashboards = []
-        self.data = []
         for root, dirs, files in os.walk(path):
             for basename in files:
                 if fnmatch.fnmatch(basename, self.pattern):
@@ -101,7 +100,7 @@ if __name__== '__main__':
     parser = argparse.ArgumentParser(description="Run")
     parser.add_argument('--conf', '-c',
                         required=True,
-                        help='Conf directory (Grafana template)')
+                        help='Conf directory (Grafana templates)')
     parser.add_argument('--grafana-url', '-u',
                         required=True,
                         help='Grafana URL')

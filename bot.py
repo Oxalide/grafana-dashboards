@@ -44,6 +44,9 @@ class Grafana(object):
             for basename in files:
                 if fnmatch.fnmatch(basename, self.pattern):
                     self.dashboards.append(os.path.join(root, basename))
+        if not self.dashboards:
+            logger.error("No dashboard to import. exit.")
+            sys.exit(1)
         for dashboard in self.dashboards:
             with open(dashboard, 'r+') as f:
                 payload = {
@@ -73,7 +76,8 @@ class Grafana(object):
             'type': engine,
             'url': url,
             'access': access,
-            'basicAuth': basicAuth
+            'basicAuth': basicAuth,
+            'isDefault': True
         }
         response = self.session.post("{}/api/datasources".format(base_url), data=json.dumps(payload))
         if response.status_code != 200:

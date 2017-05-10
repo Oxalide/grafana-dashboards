@@ -7,23 +7,9 @@
       "type": "datasource",
       "pluginId": "prometheus",
       "pluginName": "Prometheus"
-    },
-    {
-      "name": "DS_CLOUDWATCH_OXALIDEPROD2",
-      "label": "Cloudwatch OxalideProd2",
-      "description": "",
-      "type": "datasource",
-      "pluginId": "cloudwatch",
-      "pluginName": "CloudWatch"
     }
   ],
   "__requires": [
-    {
-      "type": "datasource",
-      "id": "cloudwatch",
-      "name": "CloudWatch",
-      "version": "1.0.0"
-    },
     {
       "type": "grafana",
       "id": "grafana",
@@ -59,7 +45,7 @@
     "list": []
   },
   "description": "Statistics on Prometheus instances themselves",
-  "editable": false,
+  "editable": true,
   "gnetId": null,
   "graphTooltip": 2,
   "hideControls": false,
@@ -121,7 +107,7 @@
             }
           ],
           "repeat": "prometheus_instance",
-          "span": 6,
+          "span": 12,
           "sparkline": {
             "fillColor": "rgba(189, 126, 31, 0.47)",
             "full": false,
@@ -133,7 +119,7 @@
               "expr": "prometheus_local_storage_inconsistencies_total{instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 600
+              "step": 4
             }
           ],
           "thresholds": "1",
@@ -197,7 +183,7 @@
             }
           ],
           "repeat": "prometheus_instance",
-          "span": 6,
+          "span": 12,
           "sparkline": {
             "fillColor": "rgba(189, 126, 31, 0.45)",
             "full": false,
@@ -210,7 +196,7 @@
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
-              "step": 600
+              "step": 4
             }
           ],
           "thresholds": "1",
@@ -301,11 +287,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(rate(http_requests_total{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[1m])) by (instance)",
+              "expr": "sum(rate(http_requests_total{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[1m])) by (instance)",
               "intervalFactor": 2,
               "legendFormat": "{{ instance }}",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -384,16 +370,16 @@
           "renderer": "flot",
           "repeat": "prometheus_instance",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(http_request_duration_microseconds{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}) by (instance, handler)",
+              "expr": "sum(http_request_duration_microseconds{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}) by (instance, handler)",
               "intervalFactor": 2,
               "legendFormat": "/{{ handler }}/",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -500,7 +486,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ job }}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -574,7 +560,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ job }}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -661,7 +647,7 @@
               "fill": 0
             }
           ],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -670,35 +656,35 @@
               "intervalFactor": 2,
               "legendFormat": "Resident memory",
               "refId": "A",
-              "step": 40
+              "step": 2
             },
             {
               "expr": "go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Go memstats alloc",
               "refId": "C",
-              "step": 40
+              "step": 2
             },
             {
               "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Min go memstats",
               "refId": "D",
-              "step": 40
+              "step": 2
             },
             {
               "expr": "max_over_time(go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Max go memstats",
               "refId": "E",
-              "step": 40
+              "step": 2
             },
             {
               "expr": "avg(container_spec_memory_limit_bytes{pod_name=~\"prometheus-k8s.*\", container_name=\"prometheus\"})",
               "intervalFactor": 2,
               "legendFormat": "Limit",
               "refId": "B",
-              "step": 40
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -783,7 +769,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ pod_name }}",
               "refId": "A",
-              "step": 20
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -817,283 +803,6 @@
               "logBase": 1,
               "max": null,
               "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
-      "height": 250,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_CLOUDWATCH_OXALIDEPROD2}",
-          "fill": 0,
-          "id": 11,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "WriteOps - prometheus-k8s-0",
-              "dimensions": {
-                "VolumeId": "vol-09550452e5cd1c296"
-              },
-              "expr": "",
-              "hide": false,
-              "intervalFactor": 2,
-              "metricName": "VolumeWriteOps",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "A",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "ReadOps - prometheus-k8s-0",
-              "dimensions": {
-                "VolumeId": "vol-09550452e5cd1c296"
-              },
-              "hide": false,
-              "metricName": "VolumeReadOps",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "B",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "WriteOps - prometheus-k8s-1",
-              "dimensions": {
-                "VolumeId": "vol-0b0f7d3dea9e36cd9"
-              },
-              "expr": "",
-              "hide": false,
-              "intervalFactor": 2,
-              "metricName": "VolumeWriteOps",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "C",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "ReadOps - prometheus-k8s-1",
-              "dimensions": {
-                "VolumeId": "vol-0b0f7d3dea9e36cd9"
-              },
-              "hide": false,
-              "metricName": "VolumeReadOps",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "D",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "IO  per minute - AWS EBS",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "opm",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": "0",
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_CLOUDWATCH_OXALIDEPROD2}",
-          "fill": 0,
-          "id": 32,
-          "legend": {
-            "alignAsTable": true,
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "rightSide": true,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "connected",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [
-            {
-              "alias": "/BurstBalance/",
-              "yaxis": 2
-            }
-          ],
-          "span": 12,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "alias": "IO Queue Lentgh - prometheus-k8s-0",
-              "dimensions": {
-                "VolumeId": "vol-09550452e5cd1c296"
-              },
-              "expr": "",
-              "intervalFactor": 2,
-              "metricName": "VolumeQueueLength",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "A",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "IO Queue Lentgh - prometheus-k8s-1",
-              "dimensions": {
-                "VolumeId": "vol-0b0f7d3dea9e36cd9"
-              },
-              "expr": "",
-              "intervalFactor": 2,
-              "metricName": "VolumeQueueLength",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "B",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "BurstBalance - prometheus-k8s-0",
-              "dimensions": {
-                "VolumeId": "vol-09550452e5cd1c296"
-              },
-              "expr": "",
-              "intervalFactor": 2,
-              "metricName": "BurstBalance",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "C",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            },
-            {
-              "alias": "BurstBalance - prometheus-k8s-1",
-              "dimensions": {
-                "VolumeId": "vol-0b0f7d3dea9e36cd9"
-              },
-              "expr": "",
-              "intervalFactor": 2,
-              "metricName": "BurstBalance",
-              "namespace": "AWS/EBS",
-              "period": "60",
-              "refId": "D",
-              "region": "eu-west-1",
-              "statistics": [
-                "Average"
-              ]
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "AWS EBS - Queue and Burst",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "opm",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "percent",
-              "label": "",
-              "logBase": 1,
-              "max": "100",
-              "min": "0",
               "show": true
             }
           ]
@@ -1179,21 +888,21 @@
               "intervalFactor": 2,
               "legendFormat": "Chunks to persist - {{ instance }}",
               "refId": "A",
-              "step": 20
+              "step": 2
             },
             {
               "expr": "avg(prometheus_local_storage_max_chunks_to_persist)",
               "intervalFactor": 2,
               "legendFormat": "Max chunks to persist before throttling",
               "refId": "B",
-              "step": 20
+              "step": 2
             },
             {
               "expr": "avg(prometheus_local_storage_max_memory_chunks)",
               "intervalFactor": 2,
               "legendFormat": "Max memory chunks",
               "refId": "C",
-              "step": 20
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -1272,7 +981,7 @@
           "renderer": "flot",
           "repeat": "prometheus_instance",
           "seriesOverrides": [],
-          "span": 6,
+          "span": 12,
           "stack": false,
           "steppedLine": false,
           "targets": [
@@ -1281,7 +990,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ type }}",
               "refId": "A",
-              "step": 40
+              "step": 2
             }
           ],
           "thresholds": [],
@@ -1358,7 +1067,7 @@
     ]
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-5m",
     "to": "now"
   },
   "timepicker": {
@@ -1387,6 +1096,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Prometheus statistics",
-  "version": 20
+  "title": "Prometheus statistics Copy",
+  "version": 1
 }

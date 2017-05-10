@@ -16,7 +16,7 @@ spec:
         - name: GRAFANA_USERNAME
             secretKeyRef:
               name: grafana-secrets
-              key: username
+              key: admin-user
         - name: GRAFANA_PASSWORD
           valueFrom:
             secretKeyRef:

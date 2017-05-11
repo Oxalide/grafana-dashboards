@@ -38,6 +38,9 @@ class Grafana(object):
         })
 
     def import_dashboards(self, path, base_url):
+        """
+        Method to import Grafana Dashboards using API calls
+        """
         pattern = "*.json"
         dashboards = []
         for root, dirs, files in os.walk(path):
@@ -71,6 +74,9 @@ class Grafana(object):
                 logger.info('Dashboard "{}" was successfully imported'.format(payload['dashboard']['title']))
 
     def create_datastore(self, name, engine, url, access="proxy", basicAuth=False):
+        """
+        Method to create Grafana Datasource using API calls.
+        """
         response = self.session.get("{}/api/datasources".format(base_url))
         if response.status_code != 200:
             message = {
@@ -106,7 +112,7 @@ def main():
     try:
         grafana = Grafana()
         logger.info("Try to Create prometheus datasource")
-        grafana.create_datastore("prometheus-k8s", "prometheus", "http://prometheus-operated:9090")
+        grafana.create_datastore("prometheus-k8s", "prometheus", cli.prometheus_endpoint)
         logger.info("Try to import grafana dashboards")
         grafana.import_dashboards(cli.conf, base_url)
     except GrafanaException as error:
@@ -121,6 +127,9 @@ if __name__== '__main__':
     parser.add_argument('--grafana-url', '-u',
                         required=True,
                         help='Grafana URL')
+    parser.add_argument('--prometheus-endpoint', '-s',
+                        default="http://prometheus-operated:9090",
+                        help='Prometheus endpoint (http[s]://<kubernetes servicename>:<port>)')
     cli = parser.parse_args()
     logger = logging.getLogger('run')
     log_level = 'INFO'

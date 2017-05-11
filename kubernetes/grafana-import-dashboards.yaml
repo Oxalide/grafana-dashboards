@@ -23,4 +23,13 @@ spec:
             secretKeyRef:
               name: grafana-secrets
               key: admin-password
+        command:
+        - python
+        - bot.py
+        - --conf 
+        - grafana-dashboards/dashboards 
+        - --grafana-url 
+        - http://grafana-k8s
+        - --prometheus-endpoint
+        - http://prometheus-operated:9090
       restartPolicy: Never

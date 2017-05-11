@@ -38,16 +38,16 @@ class Grafana(object):
         })
 
     def import_dashboards(self, path, base_url):
-        self.pattern = "*.json"
-        self.dashboards = []
+        pattern = "*.json"
+        dashboards = []
         for root, dirs, files in os.walk(path):
             for basename in files:
-                if fnmatch.fnmatch(basename, self.pattern):
-                    self.dashboards.append(os.path.join(root, basename))
-        if not self.dashboards:
+                if fnmatch.fnmatch(basename, pattern):
+                    dashboards.append(os.path.join(root, basename))
+        if not dashboards:
             logger.error("No dashboard to import. exit.")
             sys.exit(1)
-        for dashboard in self.dashboards:
+        for dashboard in dashboards:
             with open(dashboard, 'r+') as f:
                 payload = {
                     'dashboard': json.load(f),
@@ -71,15 +71,7 @@ class Grafana(object):
                 logger.info('Dashboard "{}" was successfully imported'.format(payload['dashboard']['title']))
 
     def create_datastore(self, name, engine, url, access="proxy", basicAuth=False):
-        payload = {
-            'name': name,
-            'type': engine,
-            'url': url,
-            'access': access,
-            'basicAuth': basicAuth,
-            'isDefault': True
-        }
-        response = self.session.post("{}/api/datasources".format(base_url), data=json.dumps(payload))
+        response = self.session.get("{}/api/datasources".format(base_url))
         if response.status_code != 200:
             message = {
                 'statusCode': response.status_code,
@@ -87,7 +79,28 @@ class Grafana(object):
             }
             raise GrafanaException(message)
         else:
-            logger.info('Datasource "{}" was successfully created'.format(name))
+            datasources = response.json()
+            dts_filter = list(filter(lambda x: x['name'] == name, datasources))
+            if dts_filter:
+                logger.warning("Data source with the name '{}' already exist. Skip.".format(name))
+            else:
+                payload = {
+                    'name': name,
+                    'type': engine,
+                    'url': url,
+                    'access': access,
+                    'basicAuth': basicAuth,
+                    'isDefault': True
+                }
+                response = self.session.post("{}/api/datasources".format(base_url), data=json.dumps(payload))
+                if response.status_code != 200:
+                    message = {
+                        'statusCode': response.status_code,
+                        'message': response.json()['message']
+                    }
+                    raise GrafanaException(message)
+                else:
+                    logger.info('Datasource "{}" was successfully created'.format(name))
 
 def main():
     try:

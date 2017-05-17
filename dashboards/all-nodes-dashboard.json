@@ -1,6 +1,4 @@
 {
-  "dashboard":
-{
     "__inputs": [
         {
             "description": "",
@@ -847,14 +845,4 @@
     "timezone": "browser",
     "title": "Aggregated node metrics",
     "version": 1
-},
-  "inputs": [
-    {
-      "name": "DS_PROMETHEUS",
-      "pluginId": "prometheus",
-      "type": "datasource",
-      "value": "prometheus"
-    }
-  ],
-  "overwrite": true
 }

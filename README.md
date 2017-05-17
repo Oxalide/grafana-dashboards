@@ -11,11 +11,11 @@ This repository has been created to be used with **Oxalide's Prometheus chart** 
 
 ## Content
 
-In this repository you will find the following components : 
+In this repository you will find the following components :
  * Grafana Dashboards _(json)_
  * A python script _(bot.py)_ which will create a prometheus datasource and import the dashboards.
  * A Dockefile to create a containerized environment to execute the script.
- 
+
 ## Arguments _(script)_
 
 To work, python script needs some parameters that you can customize.
@@ -28,7 +28,7 @@ To work, python script needs some parameters that you can customize.
 
 ## Deployment
 
-To deploy these dashboards you have just to execute the following steps : 
+To deploy these dashboards you have just to execute the following steps :
 
 1. Configure your own settings in the kubernetes job _(grafana-import-dashboards.yaml)_.
 ```
@@ -60,9 +60,9 @@ spec:
         command:
         - python
         - bot.py
-        - --conf 
-        - grafana-dashboards/dashboards 
-        - --grafana-url 
+        - --conf
+        - grafana-dashboards/dashboards
+        - --grafana-url
         - <GRAFANA_URL>
         - --prometheus-endpoint
         - <PROMETHEUS_ENDPOINT>
@@ -70,5 +70,9 @@ restartPolicy: Never
 ```
 2. Deploy it on your Kubernetes cluster.
 ```bash
-kubectl create -f grafana-import-dashboard
+kubectl create -f https://github.com/Oxalide/grafana-dashboards/raw/master/kubernetes/grafana-import-dashboards.yaml
 ```
+
+3. The created dashboards will be tagged `oxalide`. If you want to modify them,
+we advise you to duplicate them. This way, you will be able to update the dashboards
+by re-running this job.

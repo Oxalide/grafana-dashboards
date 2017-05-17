@@ -808,7 +808,8 @@
     "schemaVersion": 14,
     "style": "dark",
     "tags": [
-        "prometheus"
+        "oxalide",
+        "infra"
     ],
     "templating": {
         "list": []

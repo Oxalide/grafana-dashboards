@@ -314,7 +314,10 @@
     "schemaVersion": 12,
     "sharedCrosshair": true,
     "style": "dark",
-    "tags": [],
+    "tags": [
+        "oxalide",
+        "infra"
+    ],
     "templating": {
         "list": [
             {

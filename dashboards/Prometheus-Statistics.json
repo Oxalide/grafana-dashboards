@@ -652,21 +652,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "process_resident_memory_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}",
+              "expr": "process_resident_memory_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Resident memory",
               "refId": "A",
               "step": 2
             },
             {
-              "expr": "go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}",
+              "expr": "go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Go memstats alloc",
               "refId": "C",
               "step": 2
             },
             {
-              "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[10m])",
+              "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Min go memstats",
               "refId": "D",
@@ -1096,6 +1096,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Prometheus statistics Copy",
+  "title": "Prometheus statistics",
   "version": 1
 }

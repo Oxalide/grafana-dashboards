@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS-K8S",
+      "name": "DS_PROMETHEUS",
       "label": "prometheus-k8s",
       "description": "",
       "type": "datasource",
@@ -66,7 +66,7 @@
             "rgba(237, 40, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "If greater than 0, restart Prometheus as soon as possible.",
           "format": "none",
           "gauge": {
@@ -145,7 +145,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -256,7 +256,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 1,
           "legend": {
@@ -344,7 +344,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 2,
           "legend": {
@@ -455,7 +455,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 7,
           "legend": {
@@ -593,7 +593,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "100% = 1 CPU used",
           "fill": 1,
           "id": 8,
@@ -678,7 +678,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 0,
           "id": 5,
           "legend": {
@@ -750,7 +750,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "description": "All those values should stabilise around 0 over time.",
           "fill": 1,
           "id": 6,
@@ -859,7 +859,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 15,
           "legend": {
@@ -955,7 +955,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
+          "datasource": "${DS_PROMETHEUS}",
           "fill": 1,
           "id": 26,
           "legend": {
@@ -1047,7 +1047,7 @@
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS-K8S}",
+        "datasource": "${DS_PROMETHEUS}",
         "hide": 0,
         "includeAll": false,
         "label": null,

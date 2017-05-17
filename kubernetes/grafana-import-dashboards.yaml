@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: grafana-import-dashboard
-        image: oxalide/grafana-dashboards:latest
+        image: oxalide/grafana-dashboards:bleeding
         imagePullPolicy: Always
         env:
         - name: GRAFANA_USERNAME
@@ -26,9 +26,9 @@ spec:
         command:
         - python
         - bot.py
-        - --conf 
-        - grafana-dashboards/dashboards 
-        - --grafana-url 
+        - --conf
+        - grafana-dashboards/dashboards
+        - --grafana-url
         - http://grafana-k8s
         - --prometheus-endpoint
         - http://prometheus-operated:9090

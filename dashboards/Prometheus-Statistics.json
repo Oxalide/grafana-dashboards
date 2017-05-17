@@ -119,7 +119,7 @@
               "expr": "prometheus_local_storage_inconsistencies_total{instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "refId": "A",
-              "step": 4
+              "step": 240
             }
           ],
           "thresholds": "1",
@@ -196,7 +196,7 @@
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
-              "step": 4
+              "step": 240
             }
           ],
           "thresholds": "1",
@@ -291,7 +291,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ instance }}",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -379,7 +379,7 @@
               "intervalFactor": 2,
               "legendFormat": "/{{ handler }}/",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -400,7 +400,7 @@
           },
           "yaxes": [
             {
-              "format": "µs",
+              "format": "Âµs",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -450,164 +450,6 @@
     },
     {
       "collapse": false,
-      "height": 251,
-      "panels": [
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
-          "fill": 0,
-          "id": 5,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "repeat": null,
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(scrape_samples_post_metric_relabeling) by (job)",
-              "intervalFactor": 2,
-              "legendFormat": "{{ job }}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Number of scrapes per job",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        },
-        {
-          "aliasColors": {},
-          "bars": false,
-          "datasource": "${DS_PROMETHEUS-K8S}",
-          "description": "All those values should stabilise around 0 over time.",
-          "fill": 1,
-          "id": 6,
-          "legend": {
-            "avg": false,
-            "current": false,
-            "hideEmpty": true,
-            "hideZero": true,
-            "max": false,
-            "min": false,
-            "show": true,
-            "total": false,
-            "values": false
-          },
-          "lines": true,
-          "linewidth": 1,
-          "links": [],
-          "nullPointMode": "null",
-          "percentage": false,
-          "pointradius": 5,
-          "points": false,
-          "renderer": "flot",
-          "seriesOverrides": [],
-          "span": 6,
-          "stack": false,
-          "steppedLine": false,
-          "targets": [
-            {
-              "expr": "sum(deriv(scrape_samples_post_metric_relabeling[1h])) by (job)",
-              "intervalFactor": 2,
-              "legendFormat": "{{ job }}",
-              "refId": "A",
-              "step": 2
-            }
-          ],
-          "thresholds": [],
-          "timeFrom": null,
-          "timeShift": null,
-          "title": "Evolution of number of scrapes over 1h",
-          "tooltip": {
-            "shared": true,
-            "sort": 0,
-            "value_type": "individual"
-          },
-          "type": "graph",
-          "xaxis": {
-            "mode": "time",
-            "name": null,
-            "show": true,
-            "values": []
-          },
-          "yaxes": [
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            },
-            {
-              "format": "short",
-              "label": null,
-              "logBase": 1,
-              "max": null,
-              "min": null,
-              "show": true
-            }
-          ]
-        }
-      ],
-      "repeat": null,
-      "repeatIteration": null,
-      "repeatRowId": null,
-      "showTitle": false,
-      "title": "Dashboard Row",
-      "titleSize": "h6"
-    },
-    {
-      "collapse": false,
       "height": 250,
       "panels": [
         {
@@ -640,11 +482,18 @@
             {
               "alias": "Limit",
               "color": "#BF1B00",
-              "fill": 0
+              "fill": 0,
+              "linewidth": 3
             },
             {
               "alias": "/(Min|Max)/",
               "fill": 0
+            },
+            {
+              "alias": "Target Heap Size",
+              "color": "#0A50A1",
+              "fill": 0,
+              "linewidth": 3
             }
           ],
           "span": 12,
@@ -652,39 +501,46 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "process_resident_memory_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}",
+              "expr": "process_resident_memory_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Resident memory",
               "refId": "A",
-              "step": 2
+              "step": 10
             },
             {
-              "expr": "go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}",
+              "expr": "go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Go memstats alloc",
               "refId": "C",
-              "step": 2
+              "step": 10
             },
             {
-              "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[10m])",
+              "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Min go memstats",
               "refId": "D",
-              "step": 2
+              "step": 10
             },
             {
-              "expr": "max_over_time(go_memstats_alloc_bytes{job=\"prometheus-k8s\",instance=~\"$prometheus_instance\"}[10m])",
+              "expr": "max_over_time(go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Max go memstats",
               "refId": "E",
-              "step": 2
+              "step": 10
             },
             {
               "expr": "avg(container_spec_memory_limit_bytes{pod_name=~\"prometheus-k8s.*\", container_name=\"prometheus\"})",
               "intervalFactor": 2,
               "legendFormat": "Limit",
               "refId": "B",
-              "step": 2
+              "step": 10
+            },
+            {
+              "expr": "prometheus_local_storage_target_heap_size_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
+              "intervalFactor": 2,
+              "legendFormat": "Target Heap Size",
+              "refId": "F",
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -769,7 +625,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ pod_name }}",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -791,6 +647,164 @@
           "yaxes": [
             {
               "format": "percentunit",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        }
+      ],
+      "repeat": null,
+      "repeatIteration": null,
+      "repeatRowId": null,
+      "showTitle": false,
+      "title": "Dashboard Row",
+      "titleSize": "h6"
+    },
+    {
+      "collapse": false,
+      "height": 251,
+      "panels": [
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS-K8S}",
+          "fill": 0,
+          "id": 5,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "repeat": null,
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(scrape_samples_post_metric_relabeling) by (job)",
+              "intervalFactor": 2,
+              "legendFormat": "{{ job }}",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Number of scrapes per job",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            },
+            {
+              "format": "short",
+              "label": null,
+              "logBase": 1,
+              "max": null,
+              "min": null,
+              "show": true
+            }
+          ]
+        },
+        {
+          "aliasColors": {},
+          "bars": false,
+          "datasource": "${DS_PROMETHEUS-K8S}",
+          "description": "All those values should stabilise around 0 over time.",
+          "fill": 1,
+          "id": 6,
+          "legend": {
+            "avg": false,
+            "current": false,
+            "hideEmpty": true,
+            "hideZero": true,
+            "max": false,
+            "min": false,
+            "show": true,
+            "total": false,
+            "values": false
+          },
+          "lines": true,
+          "linewidth": 1,
+          "links": [],
+          "nullPointMode": "null",
+          "percentage": false,
+          "pointradius": 5,
+          "points": false,
+          "renderer": "flot",
+          "seriesOverrides": [],
+          "span": 6,
+          "stack": false,
+          "steppedLine": false,
+          "targets": [
+            {
+              "expr": "sum(deriv(scrape_samples_post_metric_relabeling[1h])) by (job)",
+              "intervalFactor": 2,
+              "legendFormat": "{{ job }}",
+              "refId": "A",
+              "step": 20
+            }
+          ],
+          "thresholds": [],
+          "timeFrom": null,
+          "timeShift": null,
+          "title": "Evolution of number of scrapes over 1h",
+          "tooltip": {
+            "shared": true,
+            "sort": 0,
+            "value_type": "individual"
+          },
+          "type": "graph",
+          "xaxis": {
+            "mode": "time",
+            "name": null,
+            "show": true,
+            "values": []
+          },
+          "yaxes": [
+            {
+              "format": "short",
               "label": null,
               "logBase": 1,
               "max": null,
@@ -888,21 +902,7 @@
               "intervalFactor": 2,
               "legendFormat": "Chunks to persist - {{ instance }}",
               "refId": "A",
-              "step": 2
-            },
-            {
-              "expr": "avg(prometheus_local_storage_max_chunks_to_persist)",
-              "intervalFactor": 2,
-              "legendFormat": "Max chunks to persist before throttling",
-              "refId": "B",
-              "step": 2
-            },
-            {
-              "expr": "avg(prometheus_local_storage_max_memory_chunks)",
-              "intervalFactor": 2,
-              "legendFormat": "Max memory chunks",
-              "refId": "C",
-              "step": 2
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -990,7 +990,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ type }}",
               "refId": "A",
-              "step": 2
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -1067,7 +1067,7 @@
     ]
   },
   "time": {
-    "from": "now-5m",
+    "from": "now-3h",
     "to": "now"
   },
   "timepicker": {
@@ -1096,6 +1096,6 @@
     ]
   },
   "timezone": "browser",
-  "title": "Prometheus statistics Copy",
+  "title": "Prometheus statistics",
   "version": 1
 }

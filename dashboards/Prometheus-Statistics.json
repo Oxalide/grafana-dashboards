@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
+      "name": "DS_PROMETHEUS-K8S",
       "label": "prometheus-k8s",
       "description": "",
       "type": "datasource",
@@ -66,7 +66,7 @@
             "rgba(237, 40, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "description": "If greater than 0, restart Prometheus as soon as possible.",
           "format": "none",
           "gauge": {
@@ -145,7 +145,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "format": "none",
           "gauge": {
             "maxValue": 100,
@@ -256,7 +256,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 1,
           "id": 1,
           "legend": {
@@ -291,7 +291,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ instance }}",
               "refId": "A",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -339,20 +339,18 @@
     },
     {
       "collapse": false,
-      "height": 219,
+      "height": 213,
       "panels": [
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 1,
-          "id": 2,
+          "id": 27,
           "legend": {
             "alignAsTable": true,
             "avg": false,
             "current": false,
-            "hideEmpty": true,
-            "hideZero": false,
             "max": false,
             "min": false,
             "rightSide": true,
@@ -375,11 +373,11 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(http_request_duration_microseconds{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}) by (instance, handler)",
+              "expr": "sum(http_request_duration_microseconds{job=\"prometheus-operated\", instance=~\"$prometheus_instance\"}) by (instance, handler)",
               "intervalFactor": 2,
-              "legendFormat": "/{{ handler }}/",
+              "legendFormat": "/{{ handler}}/",
               "refId": "A",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -455,7 +453,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 1,
           "id": 7,
           "legend": {
@@ -505,42 +503,42 @@
               "intervalFactor": 2,
               "legendFormat": "Resident memory",
               "refId": "A",
-              "step": 10
+              "step": 20
             },
             {
               "expr": "go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Go memstats alloc",
               "refId": "C",
-              "step": 10
+              "step": 20
             },
             {
               "expr": "min_over_time(go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Min go memstats",
               "refId": "D",
-              "step": 10
+              "step": 20
             },
             {
               "expr": "max_over_time(go_memstats_alloc_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}[10m])",
               "intervalFactor": 2,
               "legendFormat": "Max go memstats",
               "refId": "E",
-              "step": 10
+              "step": 20
             },
             {
               "expr": "avg(container_spec_memory_limit_bytes{pod_name=~\"prometheus-k8s.*\", container_name=\"prometheus\"})",
               "intervalFactor": 2,
               "legendFormat": "Limit",
               "refId": "B",
-              "step": 10
+              "step": 20
             },
             {
               "expr": "prometheus_local_storage_target_heap_size_bytes{job=\"prometheus-operated\",instance=~\"$prometheus_instance\"}",
               "intervalFactor": 2,
               "legendFormat": "Target Heap Size",
               "refId": "F",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -593,7 +591,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "description": "100% = 1 CPU used",
           "fill": 1,
           "id": 8,
@@ -625,7 +623,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ pod_name }}",
               "refId": "A",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -678,7 +676,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 0,
           "id": 5,
           "legend": {
@@ -709,7 +707,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ job }}",
               "refId": "A",
-              "step": 20
+              "step": 30
             }
           ],
           "thresholds": [],
@@ -750,7 +748,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "description": "All those values should stabilise around 0 over time.",
           "fill": 1,
           "id": 6,
@@ -783,7 +781,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ job }}",
               "refId": "A",
-              "step": 20
+              "step": 30
             }
           ],
           "thresholds": [],
@@ -859,7 +857,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 1,
           "id": 15,
           "legend": {
@@ -902,7 +900,7 @@
               "intervalFactor": 2,
               "legendFormat": "Chunks to persist - {{ instance }}",
               "refId": "A",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -955,7 +953,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "fill": 1,
           "id": 26,
           "legend": {
@@ -990,7 +988,7 @@
               "intervalFactor": 2,
               "legendFormat": "{{ type }}",
               "refId": "A",
-              "step": 10
+              "step": 20
             }
           ],
           "thresholds": [],
@@ -1040,15 +1038,15 @@
   "schemaVersion": 14,
   "style": "dark",
   "tags": [
-      "oxalide",
-      "infra"
+    "oxalide",
+    "infra"
   ],
   "templating": {
     "list": [
       {
         "allValue": null,
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "${DS_PROMETHEUS-K8S}",
         "hide": 0,
         "includeAll": false,
         "label": null,
@@ -1090,10 +1088,10 @@
       "24h",
       "2d",
       "7d",
-      "30d"
+      "15d"
     ]
   },
   "timezone": "browser",
   "title": "Prometheus statistics",
-  "version": 1
+  "version": 2
 }

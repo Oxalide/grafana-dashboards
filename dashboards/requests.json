@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
+      "name": "DS_PROMETHEUS-K8S",
       "label": "prometheus-k8s",
       "description": "",
       "type": "datasource",
@@ -45,6 +45,7 @@
   "hideControls": false,
   "id": null,
   "links": [],
+  "refresh": "30s",
   "rows": [
     {
       "collapse": false,
@@ -53,7 +54,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "description": "This represents the total [CPU resource requests](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-cpu) in the cluster.\nFor comparison the total [allocatable CPU cores](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node-allocatable.md) is also shown.",
           "fill": 0,
           "id": 1,
@@ -160,7 +161,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": null,
           "format": "percent",
           "gauge": {
@@ -242,7 +243,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "description": "This represents the total [memory resource requests](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#meaning-of-memory) in the cluster.\nFor comparison the total [allocatable memory](https://github.com/kubernetes/community/blob/master/contributors/design-proposals/node-allocatable.md) is also shown.",
           "fill": 0,
           "id": 3,
@@ -348,7 +349,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": null,
           "format": "percent",
           "gauge": {
@@ -427,8 +428,8 @@
   "schemaVersion": 14,
   "style": "dark",
   "tags": [
-      "oxalide",
-      "infra"
+    "oxalide",
+    "infra"
   ],
   "templating": {
     "list": []
@@ -456,10 +457,10 @@
       "24h",
       "2d",
       "7d",
-      "30d"
+      "15d"
     ]
   },
   "timezone": "browser",
   "title": "Resource Requests",
-  "version": 2
+  "version": 1
 }

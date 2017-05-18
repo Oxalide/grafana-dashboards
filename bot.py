@@ -56,7 +56,7 @@ class Grafana(object):
                     'dashboard': json.load(f),
                     'overwrite': True,
                     'inputs': [{
-                        'name': "DS_PROMETHEUS",
+                        'name': "DS_PROMETHEUS-K8S",
                         'type': "datasource",
                         'value': "prometheus-k8s",
                         'pluginId': "prometheus"

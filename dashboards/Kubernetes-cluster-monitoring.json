@@ -1,7 +1,7 @@
 {
   "__inputs": [
     {
-      "name": "DS_PROMETHEUS",
+      "name": "DS_PROMETHEUS-K8S",
       "label": "prometheus-k8s",
       "description": "",
       "type": "datasource",
@@ -54,7 +54,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -166,7 +166,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "editable": true,
           "error": false,
           "format": "percent",
@@ -245,7 +245,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -324,7 +324,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -405,7 +405,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -484,7 +484,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -563,7 +563,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -642,7 +642,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -721,7 +721,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -800,7 +800,7 @@
             "rgba(237, 129, 40, 0.89)",
             "rgba(245, 54, 54, 0.9)"
           ],
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -885,7 +885,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 3,
           "editable": true,
           "error": false,
@@ -981,7 +981,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 3,
           "editable": true,
           "error": false,
@@ -1077,7 +1077,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 3,
           "editable": true,
           "error": false,
@@ -1193,7 +1193,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 3,
           "editable": true,
           "error": false,
@@ -1286,7 +1286,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1381,7 +1381,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1474,7 +1474,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1585,7 +1585,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1678,7 +1678,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1782,7 +1782,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -1926,7 +1926,7 @@
         {
           "aliasColors": {},
           "bars": false,
-          "datasource": "${DS_PROMETHEUS}",
+          "datasource": "${DS_PROMETHEUS-K8S}",
           "decimals": 2,
           "editable": true,
           "error": false,
@@ -2035,7 +2035,7 @@
       {
         "allValue": ".*",
         "current": {},
-        "datasource": "${DS_PROMETHEUS}",
+        "datasource": "${DS_PROMETHEUS-K8S}",
         "hide": 0,
         "includeAll": true,
         "label": null,
@@ -2060,7 +2060,6 @@
   },
   "timepicker": {
     "refresh_intervals": [
-      "15s",
       "30s",
       "1m",
       "5m",
@@ -2077,7 +2076,7 @@
       "24h",
       "2d",
       "7d",
-      "30d"
+      "15d"
     ]
   },
   "timezone": "browser",

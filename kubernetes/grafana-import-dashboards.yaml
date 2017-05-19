@@ -10,7 +10,7 @@ spec:
     spec:
       containers:
       - name: grafana-import-dashboard
-        image: oxalide/grafana-dashboards:master
+        image: oxalide/grafana-dashboards:latest
         imagePullPolicy: Always
         env:
         - name: GRAFANA_USERNAME

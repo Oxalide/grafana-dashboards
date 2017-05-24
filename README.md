@@ -8,7 +8,7 @@ To use the content of this repository, you must to have a **Kubernetes cluster**
 
 This repository has been created to be used with **Oxalide's Prometheus chart** _(helm)_ and **Prometheus Operator** from **CoreOS**. So it's possible that repository doesn't works for you if you can't reproduce the same infrastructure.
 
-This project has been developed with **Terraform 9.0**
+This project has been developed with **Terraform 0.9**
 
 ## Deployment
 

@@ -1,21 +1,3 @@
-# Grafana Dashboards
-
-This repository, allow you to import some Grafana dashboard carried out by **Oxalide** to monitor your **Kubernetes cluster** using **Prometheus** as datasource.
-
-## Dependencies
-
-To use the content of this repository, you must to have a **Kubernetes cluster**, a **Grafana** and a **Prometheus** instance deployed on it.
-
-This repository has been created to be used with **Oxalide's Prometheus chart** _(helm)_ and **Prometheus Operator** from **CoreOS**. So it's possible that repository doesn't works for you if you can't reproduce the same infrastructure.
-
-You need also to use the latest version of terraform (v.0.9.5)
-
-## Deployment
-
-To deploy these dashboards you have just to execute the following steps :
-
-1. Configure your own grafana templatefor terraform using the file : grafana.tf
-```bash
 provider "grafana" {
   url = "<GRAFANA_ENDPOINT>"
   auth = "<GRAFANA_USER>:<GRAFANA_PASSWORD> | <GRAFANA_API_TOKEN>"
@@ -51,15 +33,3 @@ resource "grafana_dashboard" "Node-Dashboard" {
 resource "grafana_dashboard" "Requests" {
   config_json = "${file("dashboards/requests.json")}"
 }
-```
-
-2. Validate your configuration file using terraform
-
-```
-terraform plan
-```
-
-3. Deploy the dashboards
-```
-terraform apply
-```

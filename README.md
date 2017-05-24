@@ -8,13 +8,13 @@ To use the content of this repository, you must to have a **Kubernetes cluster**
 
 This repository has been created to be used with **Oxalide's Prometheus chart** _(helm)_ and **Prometheus Operator** from **CoreOS**. So it's possible that repository doesn't works for you if you can't reproduce the same infrastructure.
 
-You need also to use the latest version of terraform (v.0.9.5)
+You need also to use the latest version of terraform _(v.0.9.5)_
 
 ## Deployment
 
 To deploy these dashboards you have just to execute the following steps :
 
-1. Configure your own grafana templatefor terraform using the file : grafana.tf
+1. Configure your own grafana template for terraform using the file : grafana.tf
 ```bash
 provider "grafana" {
   url = "<GRAFANA_ENDPOINT>"

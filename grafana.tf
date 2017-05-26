@@ -33,3 +33,7 @@ resource "grafana_dashboard" "Node-Dashboard" {
 resource "grafana_dashboard" "Requests" {
   config_json = "${file("dashboards/requests.json")}"
 }
+
+resource "grafana_dashboard" "Elasticsearch" {
+  config_json = "${file("dashboards/elasticsearch.json")}"
+}

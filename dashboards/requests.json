@@ -39,10 +39,10 @@
     "list": []
   },
   "description": "Dashboard to show the resource requests vs allocatable in the cluster",
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 0,
-  "hideControls": false,
+  "hideControls": true,
   "id": null,
   "links": [],
   "refresh": "30s",

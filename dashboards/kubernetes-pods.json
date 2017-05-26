@@ -32,10 +32,10 @@
   "annotations": {
     "list": []
   },
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 1,
-  "hideControls": false,
+  "hideControls": true,
   "id": null,
   "links": [],
   "refresh": "30s",

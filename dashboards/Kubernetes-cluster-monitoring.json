@@ -39,10 +39,10 @@
     "list": []
   },
   "description": "Monitors Kubernetes cluster using Prometheus. Shows overall cluster CPU / Memory / Filesystem usage as well as individual pod, containers, systemd services statistics. Uses cAdvisor metrics only.",
-  "editable": true,
+  "editable": false,
   "gnetId": 315,
   "graphTooltip": 0,
-  "hideControls": false,
+  "hideControls": true,
   "id": null,
   "links": [],
   "refresh": "30s",

@@ -39,10 +39,10 @@
     "list": []
   },
   "description": "Dashboard to get an overview of one server",
-  "editable": true,
+  "editable": false,
   "gnetId": 22,
   "graphTooltip": 0,
-  "hideControls": false,
+  "hideControls": true,
   "id": null,
   "links": [],
   "refresh": "30s",

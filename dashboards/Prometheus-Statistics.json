@@ -45,10 +45,10 @@
     "list": []
   },
   "description": "Statistics on Prometheus instances themselves",
-  "editable": true,
+  "editable": false,
   "gnetId": null,
   "graphTooltip": 2,
-  "hideControls": false,
+  "hideControls": true,
   "id": null,
   "links": [],
   "refresh": "30s",

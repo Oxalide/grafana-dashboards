@@ -87,34 +87,26 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(kube_node_status_allocatable_cpu_cores)",
+              "expr": "sum(kube_node_status_allocatable_cpu_cores{node=~\"$Node\"})",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Allocatable CPU Cores",
               "refId": "A",
-              "step": 20
+              "step": 10
             },
             {
-              "expr": "sum(kube_pod_container_resource_requests_cpu_cores)",
+              "expr": "sum(kube_pod_container_resource_requests_cpu_cores{node=~\"$Node\"})",
               "intervalFactor": 2,
               "legendFormat": "Requested CPU Cores",
               "refId": "B",
-              "step": 20
+              "step": 10
             },
             {
-              "expr": "sum(kube_pod_container_resource_limits_cpu_cores)",
+              "expr": "sum(kube_pod_container_resource_limits_cpu_cores{node=~\"$Node\"})",
               "intervalFactor": 2,
               "legendFormat": "Limits CPU Cores",
               "refId": "C",
-              "step": 20
-            },
-            {
-              "expr": "sum(node_load1)",
-              "hide": false,
-              "intervalFactor": 2,
-              "legendFormat": "Load",
-              "refId": "D",
-              "step": 20
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -208,7 +200,7 @@
           },
           "targets": [
             {
-              "expr": "sum(kube_pod_container_resource_requests_cpu_cores) / sum(kube_node_status_allocatable_cpu_cores) * 100",
+              "expr": "sum(kube_pod_container_resource_requests_cpu_cores{node=~\"$Node\"}) / sum(kube_node_status_allocatable_cpu_cores{node=~\"$Node\"}) * 100",
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
@@ -276,33 +268,26 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "sum(kube_node_status_allocatable_memory_bytes)",
+              "expr": "sum(kube_node_status_allocatable_memory_bytes{node=~\"$Node\"})",
               "hide": false,
               "intervalFactor": 2,
               "legendFormat": "Allocatable Memory",
               "refId": "A",
-              "step": 20
+              "step": 10
             },
             {
-              "expr": "sum(kube_pod_container_resource_requests_memory_bytes)",
+              "expr": "sum(kube_pod_container_resource_requests_memory_bytes{node=~\"$Node\"})",
               "intervalFactor": 2,
               "legendFormat": "Requested Memory",
               "refId": "B",
-              "step": 20
+              "step": 10
             },
             {
-              "expr": "sum(kube_pod_container_resource_limits_memory_bytes)",
+              "expr": "sum(kube_pod_container_resource_limits_memory_bytes{node=~\"$Node\"})",
               "intervalFactor": 2,
               "legendFormat": "Limits Memory",
               "refId": "C",
-              "step": 20
-            },
-            {
-              "expr": "sum(node_memory_MemTotal) - sum(node_memory_MemFree)",
-              "intervalFactor": 2,
-              "legendFormat": "Memory usage",
-              "refId": "D",
-              "step": 20
+              "step": 10
             }
           ],
           "thresholds": [],
@@ -396,7 +381,7 @@
           },
           "targets": [
             {
-              "expr": "sum(kube_pod_container_resource_requests_memory_bytes) / sum(kube_node_status_allocatable_memory_bytes) * 100",
+              "expr": "sum(kube_pod_container_resource_requests_memory_bytes{node=~\"$Node\"}) / sum(kube_node_status_allocatable_memory_bytes{node=~\"$Node\"}) * 100",
               "intervalFactor": 2,
               "legendFormat": "",
               "refId": "A",
@@ -432,7 +417,28 @@
     "infra"
   ],
   "templating": {
-    "list": []
+    "list": [
+      {
+        "allValue": null,
+        "current": {},
+        "datasource": "${DS_PROMETHEUS-K8S}",
+        "hide": 0,
+        "includeAll": true,
+        "label": null,
+        "multi": false,
+        "name": "Node",
+        "options": [],
+        "query": "label_values(kube_node_status_allocatable_cpu_cores, node)",
+        "refresh": 1,
+        "regex": "",
+        "sort": 0,
+        "tagValuesQuery": "",
+        "tags": [],
+        "tagsQuery": "",
+        "type": "query",
+        "useTags": false
+      }
+    ]
   },
   "time": {
     "from": "now-3h",
@@ -462,5 +468,5 @@
   },
   "timezone": "browser",
   "title": "Resource Requests",
-  "version": 1
+  "version": 2
 }
